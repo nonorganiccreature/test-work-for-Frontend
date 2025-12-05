@@ -12,10 +12,6 @@ const pageState = ref<TaskPageState>({
     useFetch<Task[]>("/tasks", []).state.value.data,
   ),
   taskFilter: "all",
-  userTasks: useLocalStorage<Task[]>(
-    "user-tasks",
-    useFetch<Task[]>("/tasks", []).state.value.data,
-  ),
   updateFeedActions: [],
 });
 
