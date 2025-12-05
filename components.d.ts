@@ -11,6 +11,20 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AddForm: typeof import('./src/components/tasks/AddForm.vue')['default']
+    AppHeader: typeof import('./src/components/AppHeader.vue')['default']
+    copy: typeof import('./src/components/tasks/UpdateFeed copy.vue')['default']
+    Filter: typeof import('./src/components/tasks/Filter.vue')['default']
+    Header: typeof import('./src/components/tasks/Header.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    List: typeof import('./src/components/tasks/List.vue')['default']
+    ListEntry: typeof import('./src/components/tasks/ListEntry.vue')['default']
+    Root: typeof import('./src/components/tasks/Root.vue')['default']
+    Statisstics: typeof import('./src/components/tasks/Statisstics.vue')['default']
+    Statistics: typeof import('./src/components/tasks/Statistics.vue')['default']
+    TasksAddForm: typeof import('./src/components/tasks/TasksAddForm.vue')['default']
+    TasksFilter: typeof import('./src/components/tasks/TasksFilter.vue')['default']
+    UpdateFeed: typeof import('./src/components/tasks/UpdateFeed.vue')['default']
+    UpdateFeedEntry: typeof import('./src/components/tasks/UpdateFeedEntry.vue')['default']
   }
 }
