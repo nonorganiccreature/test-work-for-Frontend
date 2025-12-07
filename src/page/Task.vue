@@ -1,36 +1,35 @@
 <script setup lang="ts">
-import type { TaskAction, TaskPageState } from "@/types";
+import type { TaskPageState } from "@/types";
 import type { TaskDTO } from "@/types/dto";
 
 import * as Tasks from "@/components/tasks";
 
 import { ref } from "vue";
-import { useEventListener, useFetch, useLocalStorage } from "@/composables";
+import {
+  useEventListener,
+  useFetch,
+  useLocalStorage,
+  useTaskActions,
+} from "@/composables";
 import { Task } from "@/models";
 
+const tasks = useLocalStorage<Task[]>(
+  "tasks",
+  useFetch<TaskDTO[]>("/tasks", []).state.value.data.map((t) => new Task(t)),
+  {
+    transformFunction: (tasksArray: TaskDTO[]) =>
+      tasksArray.map((t) => new Task(t)),
+  },
+);
+const { state: updateFeedActions, handleActionsInvoke } = useTaskActions(tasks);
+
 const pageState = ref<TaskPageState>({
-  tasks: useLocalStorage<Task[]>(
-    "tasks",
-    useFetch<TaskDTO[]>("/tasks", []).state.value.data.map((t) => new Task(t)),
-    {
-      transformFunction: (tasksArray: TaskDTO[]) =>
-        tasksArray.map((t) => new Task(t)),
-    },
-  ),
+  tasks,
+  updateFeedActions,
   taskFilter: "all",
-  updateFeedActions: [],
 });
 
 const events = useEventListener();
-
-const handleActionsInvoke = (id: Task["id"], action: TaskAction["type"]) => {
-  pageState.value.updateFeedActions.push({
-    id: Math.random() * performance.now(),
-    time: new Date(),
-    title: pageState.value.tasks.find((t) => t.id === id)?.title || "",
-    type: action,
-  });
-};
 
 const handleKeyPress = () => {
   console.log("Key pressed");

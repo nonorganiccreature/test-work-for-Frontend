@@ -2,7 +2,7 @@
 import { Task } from "@/models";
 import { ref } from "vue";
 
-export interface ComponentProps { }
+export interface ComponentProps {}
 
 export interface ComponentEmits {
   addTask: [id: Task["id"]];
@@ -27,9 +27,8 @@ const onAddTask = () => {
     completed: false,
     createdAt: new Date(),
     updatedAt: new Date(),
-    completedAt: null
-  }
-  );
+    completedAt: null,
+  });
 
   tasks.value.push(newTask);
 
@@ -39,8 +38,13 @@ state.value.taskTitle = "";
 </script>
 <template>
   <v-form class="mb-6" @submit.prevent="onAddTask">
-    <v-text-field v-model="state.taskTitle" label="Новая задача" :rules="[(value) => !!value || 'Введите текст задачи']"
-      variant="outlined" density="comfortable" />
+    <v-text-field
+      v-model="state.taskTitle"
+      label="Новая задача"
+      :rules="[(value) => !!value || 'Введите текст задачи']"
+      variant="outlined"
+      density="comfortable"
+    />
     <v-btn type="submit" color="primary" class="mt-2">Добавить</v-btn>
   </v-form>
 </template>

@@ -1,10 +1,10 @@
-import { Task } from "@/models";
+import { Task, TaskAction } from "@/models";
 
-import type { TaskAction } from ".";
 import type { Ref } from "vue";
 
 export interface TaskPageState {
   tasks: Ref<Task[]>;
+  updateFeedActions: Ref<TaskAction[]>;
+
   taskFilter: "all" | "active" | "completed";
-  updateFeedActions: TaskAction[];
 }

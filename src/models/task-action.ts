@@ -1,9 +1,6 @@
-export interface Action {
+export class TaskAction {
   id: number;
   time: Date;
-}
-
-export interface TaskAction extends Action {
   type:
     | "deleted"
     | "created"
@@ -12,4 +9,11 @@ export interface TaskAction extends Action {
     | "uncompleted"
     | "cancelDeletion";
   title: string;
+
+  constructor(dto: TaskAction) {
+    this.id = dto.id;
+    this.time = dto.time;
+    this.type = dto.type;
+    this.title = dto.title;
+  }
 }
