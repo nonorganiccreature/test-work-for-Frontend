@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import type { DeletionTimer, Task, Timer } from "@/types";
+import type { Task } from "@/models";
+import type { DeletionTimer, Timer } from "@/types";
 
 import { formatDate, millisecondsToSeconds } from "@/utils";
 import { computed } from "vue";

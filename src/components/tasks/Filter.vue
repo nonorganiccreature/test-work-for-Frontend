@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Task } from "@/types";
+import { Task } from "@/models";
 
 export interface ComponentProps {
   tasks: Task[];

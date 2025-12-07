@@ -1,4 +1,6 @@
-import type { Task, TaskAction } from ".";
+import { Task } from "@/models";
+
+import type { TaskAction } from ".";
 import type { Ref } from "vue";
 
 export interface TaskPageState {

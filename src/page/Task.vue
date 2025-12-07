@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import type { Task, TaskAction, TaskPageState } from "@/types";
+import type { TaskAction, TaskPageState } from "@/types";
+import type { TaskDTO } from "@/types/dto";
 
 import * as Tasks from "@/components/tasks";
 
 import { ref } from "vue";
 import { useEventListener, useFetch, useLocalStorage } from "@/composables";
+import { Task } from "@/models";
 
 const pageState = ref<TaskPageState>({
   tasks: useLocalStorage<Task[]>(
     "tasks",
-    useFetch<Task[]>("/tasks", []).state.value.data,
+    useFetch<TaskDTO[]>("/tasks", []).state.value.data.map((t) => new Task(t)),
+    {
+      transformFunction: (tasksArray: TaskDTO[]) =>
+        tasksArray.map((t) => new Task(t)),
+    },
   ),
   taskFilter: "all",
   updateFeedActions: [],
@@ -65,7 +71,7 @@ events.create("resize", handleResize);
             />
           </v-col>
           <v-col cols="4">
-            <Tasks.UpdateFeed :actions="pageState.updateFeedActions" />
+            <Tasks.UpdateFeed v-model:actions="pageState.updateFeedActions" />
           </v-col>
         </v-row>
         <Tasks.Statistics :tasks="pageState.tasks" />
